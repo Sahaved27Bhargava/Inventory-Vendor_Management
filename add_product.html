@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Product Registration </title>
+    <link rel="icon" href="tab_logo.png" type="image/x-icon">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#category").change(function() {
+                if ($(this).val() === "Other") {
+                    $("#otherCategoryInput").show();
+                } else {
+                    $("#otherCategoryInput").hide();
+                }
+            });
+
+            $("#addProductForm").submit(function(e) {
+                e.preventDefault();
+
+                var productID = $("#ProductID").val();
+                var productName = $("#ProductName").val();
+                var category = $("#category").val();
+                if (category === "Other") {
+                    category = $("#otherCategoryInput").val();
+                }
+                var description = $("#Description").val();
+                var price = $("#Price").val();
+                var quantityAvailable = $("#QuantityAvailable").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "AddProductServlet",
+                    data: {
+                        ProductID: productID,
+                        ProductName: productName,
+                        Category: category,
+                        Description: description,
+                        Price: price,
+                        QuantityAvailable: quantityAvailable
+                    },
+                    success: function(response) {
+                        $("#response").text(response);
+                        $("#response").css("color", "red"); 
+                    }
+                });
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css?v=12345">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js?v=12345"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js?v=12345"></script>
+
+    <style>
+    body {
+        background: linear-gradient(135deg, rgb(196, 145, 238), rgb(102, 219, 134), rgb(173, 209, 198), rgb(231, 205, 24));
+        background-size: 400% 400%;
+        animation: gradientAnimation 15s ease infinite;
+        margin: 0;
+        padding: 0;
+    }
+
+    @keyframes gradientAnimation {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .required-star {
+        color: red;
+        font-size: 18px;
+        margin-left: 5px;
+    }
+</style>
+
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h1 class="mb-4">Add Product</h1>
+        <form id="addProductForm">
+            <div class="form-group">
+                <label for="ProductID">Product ID:<span class="required-star">*</span></label>
+                <input type="text" class="form-control" id="ProductID" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ProductName">Product Name:<span class="required-star">*</span></label>
+                <input type="text" class="form-control" id="ProductName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Category">Category:<span class="required-star">*</span></label>
+                <select class="form-control" id="category" required>
+                    <option value="">Select a category</option>
+                    <option value="1">Iron</option>
+                    <option value="2">Coal</option>
+                    <option value="Other">Other</option>
+                </select>
+                <input type="text" class="form-control mt-2" id="otherCategoryInput" style="display: none;" >
+            </div>
+
+            <div class="form-group">
+                <label for="Description">Description:<span class="required-star">*</span></label>
+                <input type="text" class="form-control" id="Description">
+            </div>
+
+            <div class="form-group">
+                <label for="Price">Price:<span class="required-star">*</span></label>
+                <input type="number" step="0.01" class="form-control" id="Price" name="Price" required>
+            </div>
+
+            <div class="form-group">
+                <label for="QuantityAvailable">Quantity Available:<span class="required-star">*</span></label>
+                <input type="number" class="form-control" id="QuantityAvailable" name="QuantityAvailable" required>
+            </div>
+
+            <center><button type="submit" class="btn btn-primary"> Submit Product Details </button>
+        </form>
+        <div class="mt-3">
+            <a href="form_selection.html"><button class="btn btn-secondary" type="button">Back</button></a>
+        </div>
+        <div id="response" class="mt-3"></div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional, if needed) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

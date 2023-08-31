@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Selection</title>
+    <link rel="icon" href="tab_logo.png" type="image/x-icon">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include your custom CSS -->
+    <style>
+        body {
+            background: radial-gradient(ellipse at center, rgb(174, 165, 218), rgb(62, 193, 148), rgb(210, 220, 35), rgb(218, 243, 254));
+            animation: gradientAnimation 10s ease infinite;
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-size: 200% 200%;
+            }
+            50% {
+                background-size: 180% 180%;
+            }
+            100% {
+                background-size: 200% 200%;
+            }
+        }
+
+        .options {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #343a40; /* Dark gray text color */
+            background-color: rgb(184, 201, 201); /* Light gray background color */
+            padding: 10px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue color */
+            border: none;
+            color: #ffffff; /* White text color */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Darker blue color on hover */
+        }
+
+        /* Style the Logout button */
+        .logout-button {
+            background-color: #6c757d; /* Gray color */
+            border-color: #6c757d; /* Gray border color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="options">
+            <h2>SELECT AN OPTION</h2>
+            <button onclick="location.href='add_product.html'"> Product Registration </button>
+            <button onclick="location.href='register_supplier.html'"> Vender Registeration </button>
+            <button onclick="location.href='transaction.html'"> Transaction </button>
+            <br>
+            <button class="logout-button" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional, if needed) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Logout function
+        function logout() {
+            // Clear session data
+            sessionStorage.removeItem("loggedInUserId");
+            // Redirect to login.html
+            window.location.href = "user.html";
+        }
+    </script>
+</body>
+</html>

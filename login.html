@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include your custom CSS -->
+    <link rel="icon" href="tab_logo.png" type="image/x-icon">
+    <style>
+        body {
+            background: linear-gradient(45deg, rgb(139, 191, 243), rgb(231, 236, 19), rgb(193, 62, 121), rgb(235, 255, 217));
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #343a40; /* Dark gray text color */
+            background-color: rgb(184, 201, 201); /* Light gray background color */
+            padding: 10px;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        body {
+            background-color: #f8f9fa; /* Light gray background color */
+            margin: 0;
+            padding: 0;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 100px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #343a40; /* Dark gray text color */
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+        }
+
+        .back-button {
+            margin-top: 20px;
+        }
+
+        /* Style the Login button */
+        .btn-primary {
+            background-color: #007bff; /* Blue color */
+            border-color: #007bff; /* Blue border color */
+        }
+
+        /* Style the Back button */
+        .back-button {
+            background-color: #6c757d; /* Gray color */
+            border-color: #6c757d; /* Gray border color */
+        }
+
+        /* Change the color of the error message */
+        #login-error {
+            color: #dc3545; /* Red color */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <h2>Login</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="userid">User ID:</label>
+                    <input type="text" class="form-control" id="userid" name="userid">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+            </form>
+            <p id="login-error"></p>
+        </div>
+        <a href="user.html"><button class="btn back-button">Back</button></a>
+    </div>
+
+    <!-- Include Bootstrap JS (optional, if needed) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inventory Transactions</title>
+    <link rel="icon" href="tab_logo.png" type="image/x-icon">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, rgb(196, 145, 238), rgb(102, 219, 134), rgb(173, 209, 198), rgb(231, 205, 24));
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .required-star {
+            color: red;
+            font-size: 18px;
+            margin-left: 5px;
+        }
+
+        .back-button {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            loadDropdownData();
+
+            // Set the current date for the transactionDate input field
+            $("#transactionDate").val(getCurrentDate());
+
+            $("#transactionForm").submit(function(e) {
+                e.preventDefault();
+
+                var transactionID = $("#transactionID").val();
+                var productID = $("#productID").val();
+                var supplierID = $("#supplierID").val();
+                var transactionType = $("#transactionType").val();
+                var quantity = $("#quantity").val();
+                var transactionDate = getCurrentDate();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/KioclLtd_sahaved/AddTransactionServlet",
+                    data: {
+                        transactionID: transactionID,
+                        productID: productID,
+                        supplierID: supplierID,
+                        transactionType: transactionType,
+                        quantity: quantity,
+                        transactionDate: transactionDate
+                    },
+                    success: function(response) {
+                        $("#response").text(response);
+                        $("#response").css("color", "red");
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Error:", error);
+                    }
+                });
+            });
+        });
+
+        function loadDropdownData() {
+            $.ajax({
+                type: "POST",
+                url: "LoadDropdownDataServlet",
+                success: function(data) {
+                    var products = data.products;
+                    var suppliers = data.suppliers;
+
+                    // Populate product dropdown
+                    var productDropdown = $("#productID");
+                    productDropdown.empty();
+                    productDropdown.append(new Option("Select a product", ""));
+                    $.each(products, function(index, product) {
+                        productDropdown.append(new Option(product.productID + ' - ' + product.productName, product.productID));
+                    });
+
+                    // Populate supplier dropdown
+                    var supplierDropdown = $("#supplierID");
+                    supplierDropdown.empty();
+                    supplierDropdown.append(new Option("Select a supplier", ""));
+                    $.each(suppliers, function(index, supplier) {
+                        supplierDropdown.append(new Option(supplier.supplierID + ' - ' + supplier.supplierName, supplier.supplierID));
+                    });
+                }
+            });
+        }
+
+        function getCurrentDate() {
+            var today = new Date();
+            var yyyy = today.getFullYear();
+            var mm = String(today.getMonth() + 1).padStart(2, "0");
+            var dd = String(today.getDate()).padStart(2, "0");
+            return yyyy + "-" + mm + "-" + dd;
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Inventory Transactions</h1>
+        <form id="transactionForm">
+            <div class="form-group">
+                <label for="transactionID">Transaction ID:<span class="required-star">*</span></label>
+                <input type="number" class="form-control" id="transactionID" required>
+            </div>
+
+            <div class="form-group">
+                <label for="productID">Product:<span class="required-star">*</span></label>
+                <select class="form-control" id="productID" required>
+                    <option value="">--Select a product--</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="supplierID">Supplier:<span class="required-star">*</span></label>
+                <select class="form-control" id="supplierID" required>
+                    <option value="">--Select a supplier--</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="transactionType">Transaction Type:<span class="required-star">*</span></label>
+                <select class="form-control" id="transactionType" required>
+                    <option value="">--Select a Transaction Type--</option>
+                    <option value="Purchase">Purchase</option>
+                    <option value="Sale">Sale</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:<span class="required-star">*</span></label>
+                <input type="number" class="form-control" id="quantity" required>
+            </div>
+
+            <div class="form-group">
+                <label for="transactionDate">Transaction Date:</label>
+                <input type="date" class="form-control" id="transactionDate" value="" required>
+            </div>
+
+            <center><button type="submit" class="btn btn-primary">Submit Transaction Details </button></center>
+        </form>
+        <div class="mt-3">
+            <a href="form_selection.html"><button class="btn btn-secondary back-button" type="button">Back</button></a>
+        </div>
+        <div id="response" class="mt-3"></div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional, if needed) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

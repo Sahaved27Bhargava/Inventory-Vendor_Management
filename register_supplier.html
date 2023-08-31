@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Vendor Registeration </title>
+    <link rel="icon" href="tab_logo.png" type="image/x-icon">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, rgb(196, 145, 238), rgb(102, 219, 134), rgb(173, 209, 198), rgb(231, 205, 24));
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            margin: 0;
+            padding: 0;
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .required-star {
+            color: red;
+            font-size: 18px;
+            margin-left: 5px;
+        }
+
+        .back-button {
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#registerSupplierForm").submit(function(e) {
+                e.preventDefault();
+
+                var SupplierID = $("#SupplierID").val();
+                var SupplierName = $("#SupplierName").val();
+                var ContactName = $("#ContactName").val();
+                var Email = $("#Email").val();
+                var Phone = $("#Phone").val();
+
+                // Email validation regular expression
+                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                // Phone number validation regular expression
+                var phonePattern = /^\d{10}$/;
+
+                if (!Email.match(emailPattern)) {
+                    alert("Invalid email address. Example: user@example.com");
+                    return;
+                }
+
+                if (!Phone.match(phonePattern)) {
+                    alert("Invalid phone number");
+                    return;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "RegisterSupplierServlet",
+                    data: {
+                        SupplierID: SupplierID,
+                        SupplierName: SupplierName,
+                        ContactName: ContactName,
+                        Email: Email,
+                        Phone: Phone
+                    },
+                    success: function(response) {
+                        $("#response").text(response);
+                        $("#response").css("color", "red");
+                    },
+                    error: function(xhr, status, error) {
+                        console.log("Error:", xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Register Supplier</h1>
+        <form id="registerSupplierForm">
+            <div class="form-group">
+                <label for="SupplierID">Supplier ID:<span class="required-star">*</span></label>
+                <input type="number" class="form-control" id="SupplierID" required>
+            </div>
+
+            <div class="form-group">
+                <label for="SupplierName">Supplier Company Name:<span class="required-star">*</span></label>
+                <input type="text" class="form-control" id="SupplierName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ContactName">Supplier Contact Name:<span class="required-star">*</span></label>
+                <input type="text" class="form-control" id="ContactName">
+            </div>
+
+            <div class="form-group">
+                <label for="Email">Email:<span class="required-star">*</span></label>
+                <input type="email" class="form-control" id="Email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="Phone">Phone:<span class="required-star">*</span></label>
+                <input type="tel" class="form-control" id="Phone" required>
+            </div>
+
+            <center><button type="submit" class="btn btn-primary"> Submit Vendor Details </button></center>
+        </form>
+        <div class="mt-3">
+            <a href="form_selection.html"><button class="btn btn-secondary back-button" type="button">Back</button></a>
+        </div>
+        <div id="response" class="mt-3"></div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional, if needed) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

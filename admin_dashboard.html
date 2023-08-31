@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="icon" href="tab_logo.png" type="image/x-icon">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Light gray background color */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #343a40; /* Dark gray text color */
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #tableSelect,
+        #fetchData,
+        #logoutButton {
+            margin-top: 10px;
+        }
+
+        #tableData {
+            margin-top: 20px;
+        }
+
+        /* Style the logout button */
+        #logoutButton {
+            background-color: #6c757d; /* Gray color */
+            border-color: #6c757d; /* Gray border color */
+            color: #fff; /* White text color */
+        }
+
+        /* Style the fetched table */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="admin_dashboard.js"></script>
+    <script>
+        // Retrieve and display the logged-in user ID
+        // Logout function
+        function logout() {
+            // Clear session data
+            sessionStorage.removeItem("loggedInUserId");
+            // Redirect to login.html
+            window.location.href = "user.html";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <label for="tableSelect">Select Table:</label>
+        <select class="form-control" id="tableSelect">
+            <option value="">--Select a Table--</option>
+            <option value="Products"> <center> Products Details </center> </option>
+            <option value="Suppliers"> Vendor Details </option>
+            <option value="InventoryTransactions"> Transactions Details </option>
+        </select>
+        <button class="btn btn-primary" id="fetchData">Fetch Data</button>
+        <div id="tableData"></div>
+        <br>
+        <top><button class="btn btn-secondary" id="logoutButton" onclick="logout()">Logout</button></top>
+    </div>
+</body>
+</html>

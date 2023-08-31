@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>User</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include your custom CSS -->
+    <link rel="icon" href="tab_logo.png" type="image/x-icon">
+    <style>
+        /* Apply background image to the slideshow container */
+        .background-slideshow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Example background images (replace with your actual images) */
+        .slide:nth-child(1) {
+            background-image: url('img-1.jpg');
+        }
+
+        .company-header {
+            background-color: rgb(11, 192, 244);
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .company-info {
+            background-color: rgb(26, 193, 230); /* Set the background color you want */
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .company-info h1 {
+            font-size: 24px;
+            color: white; /* Set the text color for company name */
+        }
+
+        .company-header img {
+            max-height: 50px;
+        }
+
+        /* Style the options buttons */
+        .options {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .options button {
+            margin: 5px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Company name and logo in the header -->
+    <header class="company-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="company-info">
+                        
+                        <img src="logo.png" alt="Company Logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Background image slideshow -->
+    <div class="background-slideshow">
+        <div class="slide"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </div>
+
+    <!-- Content buttons -->
+    <div class="options">
+        <button onclick="location.href='login.html'" class="btn btn-primary">LOGIN</button>
+        <button onclick="location.href='signup.html'" class="btn btn-success">SIGN UP</button>
+        <button onclick="location.href='admin_login.html'" class="btn btn-secondary">Admin Login</button>
+    </div>
+
+    <!-- Include Bootstrap JS (optional, if needed) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
